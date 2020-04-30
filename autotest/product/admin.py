@@ -6,7 +6,7 @@ from .models import Product
 
 class ProductAdmin(admin.ModelAdmin):
     # 设置列表可显示的字段
-    list_display = ('id', 'product_name', 'product_desc', 'producter', 'create_time',)
+    list_display = ['id', 'product_name', 'product_desc', 'producter', 'create_time', ]
 
     # 下面过滤项目可根据实际情况确定是否取消注释
     # # 设置过滤选项
