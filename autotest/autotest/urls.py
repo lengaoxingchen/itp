@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from apitest import views  # 加入引用
+from product import proviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', views.test),  # 加入关联路径及函数
-    path('login/', views.login),
+    path('login/', views.login),  # 登录映射
+    path('home/', views.home),  # 登录成功后跳转首页
+    path('logout/', views.logout),  # 登出功能
+    path('product_manage', proviews.product_manage)
 ]
