@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse  # 加入引用
 from django.contrib import auth
 from django.http import HttpResponseRedirect
-from .models import ApiTest, ApiStep
+from .models import ApiTest, ApiStep, Apis
 from django.contrib.auth.decorators import login_required
 
 
@@ -53,3 +53,10 @@ def apistep_manage(request):
     apistep_list = ApiStep.objects.all()
     username = request.session.get('user', '')
     return render(request, "apistep_manage.html", {"user": username, "apisteps": apistep_list})
+
+
+@login_required
+def apis_manage(request):
+    apis_list = Apis.objects.all()
+    username = request.session.get('user', '')
+    return render(request, 'apis_manage.html', {'user': username, 'apis': apis_list})

@@ -1,12 +1,21 @@
 from django.contrib import admin
 from .models import Product
+from apitest.models import Apis, ApiTest
 
 
 # Register your models here.
 
+class ApisAdmin(admin.TabularInline):
+    list_display = ['api_name', 'api_url', 'api_param_value', 'api_method', 'api_result', 'api_status', 'create_time',
+                    'id', 'product', ]
+    model = Apis
+    extra = 1
+
+
 class ProductAdmin(admin.ModelAdmin):
     # 设置列表可显示的字段
     list_display = ['id', 'product_name', 'product_desc', 'producter', 'create_time', ]
+    inlines = [ApisAdmin]
 
     # 下面过滤项目可根据实际情况确定是否取消注释
     # # 设置过滤选项

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <!--书中引用了css和js的代码暂时不用,不添加-->
+    <title>ITP自动化测试平台</title>
+</head>
+<body role="document">
+<!--导航栏-->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">&nbsp;</a>
+        <ul class="nav justify-content-center">
+        </ul>
+        <ul class="nav justify-content-end">
+            <li class="nav-link"><a style="color: white" href="#">{{user}}</a></li>
+            <li class="nav-link"><a style="color: white" href="/logout/">退出</a></li>
+        </ul>
+    </div>
+</nav>
+<!--用户管理-->
+<div class="row" style="padding-top: 70px">
+    <div class="col-md-11">
+        <table class="table table-striped" style="table-layout: fixed">
+            <style>
+                td {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            </style>
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>用户名</td>
+                <td>密码</td>
+                <td>邮箱</td>
+                <td>最近登录日期</td>
+                <td>注册日期</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {% for user in users %}
+                <td>{{user.id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.last_login}}</td>
+                <td>{{user.date_joined}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

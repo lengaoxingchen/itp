@@ -4,6 +4,8 @@ from django.db import models
 
 # Create your models here.
 
+
+# 接口管理模型
 class ApiTest(models.Model):
     Product = models.ForeignKey('product.Product', on_delete=models.CASCADE, null=True)  # 关键产品ID,其中product是应用名,
     # Product是product应用的表名
@@ -21,8 +23,9 @@ class ApiTest(models.Model):
         return self.apitest_name
 
 
+# 接口步骤模型
 class ApiStep(models.Model):
-    ApiTest = models.ForeignKey('ApiTest', on_delete=models.CASCADE)  # 关键接口id
+    ApiTest = models.ForeignKey('ApiTest', on_delete=models.CASCADE, null=True)  # 关键接口id
     api_step = models.CharField('测试步骤', max_length=100, null=True)  # 接口步骤
     api_name = models.CharField('接口名称', max_length=100)  # 接口标题
     api_url = models.CharField('url地址', max_length=200)  # 接口地址
@@ -37,3 +40,23 @@ class ApiStep(models.Model):
 
     def __str__(self):
         return self.api_step
+
+
+# 流程接口表模型
+class Apis(models.Model):
+    Product = models.ForeignKey('product.Product', on_delete=models.CASCADE, null=True)  # 关键产品ID,其中product是应用名,
+    api_name = models.CharField('接口名称', max_length=100)  # 接口标题
+    api_url = models.CharField('url地址', max_length=200)  # 接口地址
+    api_param_value = models.CharField('请求参数和值', max_length=800)  # 请求参数和值
+    REQUEST_METHOD = (('0', 'get'), ('1', 'post'), ('2', 'put'), ('3', 'delete'), ('4', 'patch'))
+    api_method = models.CharField(verbose_name='请求方法', choices=REQUEST_METHOD, default='get', max_length=200)  # 请求方法
+    api_result = models.CharField('预期结果', max_length=200)  # 预期结果
+    api_status = models.BooleanField('是否通过')  # 测试结果
+    create_time = models.DateTimeField('创建时间', auto_now=True)  # 创建时间,自动获取当前时间
+
+    class Meta:
+        verbose_name = '单一场景接口'
+        verbose_name_plural = '单一场景接口'
+
+    def __str__(self):
+        return self.api_name
