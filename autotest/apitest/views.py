@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse  # 加入引用
 from django.contrib import auth
 from django.http import HttpResponseRedirect
+from .models import ApiTest, ApiStep
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -35,3 +37,19 @@ def home(request):
 def logout(request):
     auth.logout(request)
     return render(request, 'login.html')
+
+
+# 接口管理
+@login_required
+def apitest_manage(request):
+    apitest_list = ApiTest.objects.all()  # 读取所有流程接口数据
+    username = request.session.get('user', '')  # 读取浏览器登录session
+    return render(request, "apitest_manage.html", {"user": username, "apitests": apitest_list})  # 定义流程接口数据并返回给前端
+
+
+# 接口步骤管理
+@login_required
+def apistep_manage(request):
+    apistep_list = ApiStep.objects.all()
+    username = request.session.get('user', '')
+    return render(request, "apistep_manage.html", {"user": username, "apisteps": apistep_list})

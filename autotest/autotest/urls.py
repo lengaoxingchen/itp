@@ -24,5 +24,7 @@ urlpatterns = [
     path('login/', views.login),  # 登录映射
     path('home/', views.home),  # 登录成功后跳转首页
     path('logout/', views.logout),  # 登出功能
-    path('product_manage', proviews.product_manage)
+    path('product_manage/', proviews.product_manage),
+    path('apitest_manage/', views.apitest_manage),
+    path('apistep_manage/', views.apistep_manage),
 ]
