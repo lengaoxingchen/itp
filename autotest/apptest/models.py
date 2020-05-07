@@ -23,8 +23,9 @@ class AppCaseStep(models.Model):
     AppCase = models.ForeignKey(AppCase, on_delete=models.CASCADE, null=True)  # 关联接口Id
     app_test_step = models.CharField('测试步骤', max_length=200)  # 测试步骤
     app_test_objname = models.CharField('测试对象名称描述', max_length=200)  # 测试对象名称描述
-    app_opt_method = models.CharField('定位方式', max_length=200)  # 定位方式
+    app_find_method = models.CharField('定位方式', max_length=200, null=True)  # 定位方式
     app_ev_element = models.CharField('控件元素', max_length=800)  # 控件元素
+    app_opt_method = models.CharField('操作方法', max_length=200)  # 操作方法
     app_test_date = models.CharField('测试数据', max_length=200, null=True)  # 测试数据,临时增加字段时要设置可为空
     app_assert_data = models.CharField('校验数据', max_length=200)  # 校验数据
     app_test_result = models.BooleanField('测试结果')  # 测试结果

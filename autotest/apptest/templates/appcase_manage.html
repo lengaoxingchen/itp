@@ -19,35 +19,32 @@
         </ul>
     </div>
 </nav>
-<!--流程接口测试步骤-->
-<div class="row" style="padding-top: 70px;">
+<!--app测试用例列表-->
+<div class="row" style="padding-top: 70px">
     <div class="col-md-11">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>产品</th>
-                <th>单一接口测试用例名称</th>
-                <th>URL地址</th>
-                <th>参数=值</th>
-                <th>方法</th>
-                <th>预期结果</th>
-                <th>测试结果</th>
-                <th>时间</th>
+                <td>ID</td>
+                <td>产品</td>
+                <td>测试用例名称</td>
+                <td>测试结果</td>
+                <td>测试负责人</td>
+                <td>时间</td>
+                <td>测试用例步骤</td>
             </tr>
             </thead>
             <tbody>
-            {% for api in apis %}
             <tr>
-                <td>{{api.id}}</td>
-                <td>{{api.Product.product_name}}</td>
-                <td>{{api.api_name}}</td>
-                <td>{{api.api_url}}</td>
-                <td>{{api.api_param_value}}</td>
-                <td>{{api.api_method}}</td>
-                <td>{{api.api_result}}</td>
-                <td>{{api.api_status}}</td>
-                <td>{{api.create_time}}</td>
+                {% for app_case in app_cases %}
+                <td>{{app_case.id}}</td>
+                <td>{{app_case.Product.product_name}}</td>
+                <td>{{app_case.app_case_name}}</td>
+                <td>{{app_case.app_test_result}}</td>
+                <td>{{app_case.app_tester}}</td>
+                <td>{{app_case.create_time}}</td>
+                <td><a href="#"> {{app_case.app_case_step}}</a></td>
+                <td>{{app_case.app_case_step}}</td>
             </tr>
             {% endfor %}
             </tbody>

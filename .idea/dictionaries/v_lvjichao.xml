@@ -6,6 +6,9 @@
       <w>apitest</w>
       <w>apitester</w>
       <w>apitests</w>
+      <w>appcase</w>
+      <w>appcases</w>
+      <w>appcasestep</w>
       <w>apptest</w>
       <w>autotest</w>
       <w>creater</w>
@@ -13,6 +16,9 @@
       <w>navbar</w>
       <w>objname</w>
       <w>producter</w>
+      <w>webcase</w>
+      <w>webcasestep</w>
+      <w>webtest</w>
     </words>
   </dictionary>
 </component>

@@ -4,6 +4,8 @@ from django.contrib import auth
 from django.http import HttpResponseRedirect
 from .models import ApiTest, ApiStep, Apis
 from django.contrib.auth.decorators import login_required
+import pymysql
+import HTMLTestRunner
 
 
 # Create your views here.
@@ -55,8 +57,33 @@ def apistep_manage(request):
     return render(request, "apistep_manage.html", {"user": username, "apisteps": apistep_list})
 
 
+# 单一接口管理
 @login_required
 def apis_manage(request):
     apis_list = Apis.objects.all()
     username = request.session.get('user', '')
     return render(request, 'apis_manage.html', {'user': username, 'apis': apis_list})
+
+
+# 测试报告
+@login_required
+def test_report(request):
+    username = request.session.get('user', '')
+    apis_list = Apis.objects.all()
+    apis_count = Apis.objects.all().count()  # 统计接口数
+    db = pymysql.connect(user='root', db='autotest', password='123456', host='123.57.135.88', port=3306)
+    cursor = db.cursor()
+    pass_sql = 'select count(id) from autotest.apitest_apis where apitest_apis.api_status=1'
+    aa = cursor.execute(pass_sql)
+    api_pass_count = [row[0] for row in cursor.fetchmany(aa)][0]
+    fail_sql = 'select count(id) from autotest.apitest_apis where apitest_apis.api_status=0'
+    bb = cursor.execute(fail_sql)
+    api_fail_count = [row[0] for row in cursor.fetchmany(bb)][0]
+    db.close()
+    return render(request, 'report.html',
+                  {'user': username, 'apis': apis_list, 'apis_count': apis_count, 'api_pass_count': api_pass_count,
+                   'api_fail_count': api_fail_count})  # 把值赋值给apis_count变量
+
+
+def left(request):
+    return render(request, 'left.html')
