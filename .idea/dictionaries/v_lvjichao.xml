@@ -9,6 +9,7 @@
       <w>appcase</w>
       <w>appcases</w>
       <w>appcasestep</w>
+      <w>appstep</w>
       <w>apptest</w>
       <w>autotest</w>
       <w>creater</w>
@@ -18,6 +19,7 @@
       <w>producter</w>
       <w>webcase</w>
       <w>webcasestep</w>
+      <w>webstep</w>
       <w>webtest</w>
     </words>
   </dictionary>

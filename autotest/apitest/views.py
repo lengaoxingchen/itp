@@ -6,6 +6,7 @@ from .models import ApiTest, ApiStep, Apis
 from django.contrib.auth.decorators import login_required
 import pymysql
 import HTMLTestRunner
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Create your views here.
@@ -46,7 +47,18 @@ def logout(request):
 def apitest_manage(request):
     apitest_list = ApiTest.objects.all()  # 读取所有流程接口数据
     username = request.session.get('user', '')  # 读取浏览器登录session
-    return render(request, "apitest_manage.html", {"user": username, "apitests": apitest_list})  # 定义流程接口数据并返回给前端
+    apitest_count = ApiTest.objects.all().count()  # 统计Api数
+    paginator = Paginator(apitest_list, 8)
+    page = request.GET.get('page', 1)
+    currentPage = int(page)
+    try:
+        apitest_list = paginator.page(currentPage)
+    except PageNotAnInteger:
+        apitest_list = paginator.page(1)
+    except EmptyPage:
+        apitest_list = paginator.page(paginator.num_pages)
+    return render(request, "apitest_manage.html",
+                  {"user": username, "apitests": apitest_list, "apitest_count": apitest_count})  # 定义流程接口数据并返回给前端
 
 
 # 接口步骤管理
@@ -54,7 +66,18 @@ def apitest_manage(request):
 def apistep_manage(request):
     apistep_list = ApiStep.objects.all()
     username = request.session.get('user', '')
-    return render(request, "apistep_manage.html", {"user": username, "apisteps": apistep_list})
+    apistep_count = ApiStep.objects.all().count()  # 统计ApiStep数
+    paginator = Paginator(apistep_list, 8)
+    page = request.GET.get('page', 1)
+    currentPage = int(page)
+    try:
+        apistep_list = paginator.page(currentPage)
+    except PageNotAnInteger:
+        apistep_list = paginator.page(1)
+    except EmptyPage:
+        apistep_list = paginator.page(paginator.num_pages)
+    return render(request, "apistep_manage.html",
+                  {"user": username, "apisteps": apistep_list, 'apistep_count': apistep_count})
 
 
 # 单一接口管理
@@ -62,7 +85,17 @@ def apistep_manage(request):
 def apis_manage(request):
     apis_list = Apis.objects.all()
     username = request.session.get('user', '')
-    return render(request, 'apis_manage.html', {'user': username, 'apis': apis_list})
+    apis_count = Apis.objects.all().count()  # 统计Api数
+    paginator = Paginator(apis_list, 8)
+    page = request.GET.get('page', 1)
+    currentPage = int(page)
+    try:
+        apis_list = paginator.page(currentPage)
+    except PageNotAnInteger:
+        apis_list = paginator.page(1)
+    except EmptyPage:
+        apis_list = paginator.page(paginator.num_pages)
+    return render(request, 'apis_manage.html', {'user': username, 'apis': apis_list, 'apis_count': apis_count})
 
 
 # 测试报告
@@ -87,3 +120,27 @@ def test_report(request):
 
 def left(request):
     return render(request, 'left.html')
+
+
+@login_required
+def apitest_search(request):
+    username = request.session.get('user', '')
+    search_name = request.GET.get('apitest_name', '')
+    apitest_list = ApiTest.objects.filter(apitest_name__icontains=search_name)
+    return render(request, 'apitest_manage.html', {'user': username, 'apitests': apitest_list})
+
+
+@login_required
+def apistep_search(request):
+    username = request.session.get('user', '')
+    search_name = request.GET.get('api_name', '')
+    apistep_list = ApiStep.objects.filter(api_name__icontains=search_name)
+    return render(request, 'apistep_manage.html', {'user': username, 'apisteps': apistep_list})
+
+
+@login_required
+def api_search(request):
+    username = request.session.get('user', '')
+    search_name = request.GET.get('api_name', '')
+    api_list = Apis.objects.filter(api_name__icontains=search_name)
+    return render(request, 'apis_manage.html', {'user': username, 'apis': api_list})
