@@ -47,7 +47,7 @@ def logout(request):
 def apitest_manage(request):
     apitest_list = ApiTest.objects.all()  # 读取所有流程接口数据
     username = request.session.get('user', '')  # 读取浏览器登录session
-    apitest_count = ApiTest.objects.all().count()  # 统计Api数
+    apitest_count = ApiTest.objects.all().count()  # 统计Apitest数
     paginator = Paginator(apitest_list, 8)
     page = request.GET.get('page', 1)
     currentPage = int(page)
@@ -144,3 +144,8 @@ def api_search(request):
     search_name = request.GET.get('api_name', '')
     api_list = Apis.objects.filter(api_name__icontains=search_name)
     return render(request, 'apis_manage.html', {'user': username, 'apis': api_list})
+
+
+def welcome(request):
+    return render(request, 'welcome.html')
+

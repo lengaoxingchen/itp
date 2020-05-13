@@ -43,12 +43,13 @@
             </style>
             <thead>
             <tr>
-                <td>ID</td>
-                <td>用户名</td>
-                <td>密码</td>
-                <td>邮箱</td>
-                <td>最近登录日期</td>
-                <td>注册日期</td>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>密码</th>
+                <th>邮箱</th>
+                <th>最近登录日期</th>
+                <th>注册日期</th>
+                <th>编辑</th>
             </tr>
             </thead>
             <tbody>
@@ -60,6 +61,11 @@
                 <td>{{user.email}}</td>
                 <td>{{user.last_login}}</td>
                 <td>{{user.date_joined}}</td>
+                <td>
+                    <a style="color: lightblue" class="related-widget-wrapper-link add-related" id="add_id_User"
+                       href="../admin/auth/user/{{user.id}}/change?_to_field=id&amp;_popup=1"><img
+                            src="../../static/admin/img/icon-changelink.png"></a>
+                </td>
             </tr>
             {% endfor %}
             </tbody>

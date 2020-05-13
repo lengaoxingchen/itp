@@ -11,6 +11,7 @@ from django.core.paginator import PageNotAnInteger, Paginator, EmptyPage
 def appcase_manage(request):
     username = request.session.get('user', '')
     appcase_list = AppCase.objects.all()
+    appcase_count = AppCase.objects.all().count()
     paginator = Paginator(appcase_list, 8)
     page = request.GET.get('page', 1)
     currentPage = int(page)
@@ -20,13 +21,15 @@ def appcase_manage(request):
         appcase_list = paginator.page(1)
     except EmptyPage:
         appcase_list = paginator.page(paginator.num_pages)
-    return render(request, 'appcase_manage.html', {"user": username, 'app_cases': appcase_list})
+    return render(request, 'appcase_manage.html',
+                  {"user": username, 'app_cases': appcase_list, 'appcase_count': appcase_count})
 
 
 @login_required
 def appcasestep_manage(request):
     username = request.session.get('user', '')
     appcasestep_list = AppCaseStep.objects.all()
+    appcasestep_count = AppCaseStep.objects.all().count()
     paginator = Paginator(appcasestep_list, 8)
     page = request.GET.get('page', 1)
     currentPage = int(page)
@@ -36,7 +39,8 @@ def appcasestep_manage(request):
         appcasestep_list = paginator.page(1)
     except EmptyPage:
         appcasestep_list = paginator.page(paginator.num_pages)
-    return render(request, 'appcasestep_manage.html', {'user': username, 'app_case_steps': appcasestep_list})
+    return render(request, 'appcasestep_manage.html',
+                  {'user': username, 'app_case_steps': appcasestep_list, 'appcasestep_count': appcasestep_count})
 
 
 @login_required

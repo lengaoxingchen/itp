@@ -12,12 +12,13 @@
     <div class="container">
         <a class="navbar-brand" href="#">&nbsp;</a>
         <ul class="nav justify-content-center">
-            <li><a style="color: white" href="/appcase_manage/">app测试用例</a></li>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <li class="active"><a style="color: white" href="/appcasestep_manage/">app测试用例步骤</a></li>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li class="active"><a style="color: white" href="/apis_manage">单一接口测试用例</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li><a style="color: white" href="/apitest_manage">流程接口</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li class="active"><a style="color: white" href="/appcase_manage">app用例</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li class="active"><a style="color: white" href="/webcase_manage">web用例</a></li>
         </ul>
         <ul class="nav justify-content-end">
             <li class="nav-link"><a style="color: white" href="#">{{user}}</a></li>
@@ -32,6 +33,25 @@
         &nbsp; &nbsp; &nbsp; &nbsp;
         <input type="search" name="app_case_name" placeholder="名称" required>
         <button type="submit">搜索</button>
+
+
+        <div style="float:right;width:65%">
+
+            <select name="Appcase" id="id_Appcase">
+                <option value="" selected>--------产品--------</option>
+                <option value="">api单一流程接口测试用例</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="related-widget-wrapper-link change-related" id="change_id_Appcase"
+               data-href-template="/admin/apptest/appcase/__fk__/change/?_to_field=id&amp;_popup=1" title="更改选中的测试用例">
+                <img src="../../static/admin/img/icon-changelink.png" alt="修改"/>
+            </a>
+            <a style='color:lightblue' class="related-widget-wrapper-link add-related" id="add_id_Appcase"
+               href="/admin/apptest/appcase/add/?_to_field=id&amp;_popup=1" title="增加另一个 测试用例">
+                <img src="../../static/admin/img/icon-addlink.svg" alt="增加"/>增加
+            </a>
+        </div>
+
     </form>
 </div>
 <!--app测试用例列表-->
@@ -40,13 +60,14 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <td>ID</td>
-                <td>产品</td>
-                <td>测试用例名称</td>
-                <td>测试结果</td>
-                <td>测试负责人</td>
-                <td>时间</td>
-                <td>测试用例步骤</td>
+                <th>ID</th>
+                <th>产品</th>
+                <th>测试用例名称</th>
+                <th>测试结果</th>
+                <th>测试负责人</th>
+                <th>时间</th>
+                <th>测试用例步骤</th>
+                <th>编辑</th>
             </tr>
             </thead>
             <tbody>
@@ -60,6 +81,11 @@
                 <td>{{app_case.create_time}}</td>
                 <td><a href="#"> {{app_case.app_case_step}}</a></td>
                 <td>{{app_case.app_case_step}}</td>
+                <td>
+                    <a style="color: lightblue" class="related-widget-wrapper-link add-related" id="add_id_Appcase"
+                       href="../admin/appcase/appcase/{{app_case.id}}/change?_to_field=id&amp;_popup=1"><img
+                            src="../../static/admin/img/icon-changelink.png"></a>
+                </td>
             </tr>
             {% endfor %}
             </tbody>
@@ -102,6 +128,12 @@
             {# 下一页链接结束 #}
         </ul>
     </div>
+</div>
+<div style="position: absolute;right: 100px;width: 160px;">
+    <tr>
+        <th>AppCase总数:</th>
+        <td>{{appcase_count}}</td>
+    </tr>
 </div>
 </body>
 </html>

@@ -23,3 +23,5 @@ class ApisAdmin(admin.ModelAdmin):
 
 admin.site.register(Apis)
 admin.site.register(ApiTest, ApiTestAdmin)
+admin.site.site_title = 'ITP自动化平台测试开发'
+admin.site.site_header = 'ITP自动化平台测试开发'

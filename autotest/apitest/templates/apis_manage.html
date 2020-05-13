@@ -10,14 +10,16 @@
 <body role="document">
 <!--导航栏-->
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-    <div class="container">
+    <div style="height: 46px" class="container">
         <a class="navbar-brand" href="#">&nbsp;</a>
         <ul class="nav justify-content-center">
-            <li><a style="color: white" href="/apitest_manage/">流程接口测试用例</a></li>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <li class="active"><a style="color: white" href="/apistep_manage/">流程接口测试步骤</a></li>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <li class="active"><a style="color: white" href="/apis_manage">单一接口测试用例</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li><a style="color: white" href="/apitest_manage">流程接口</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li class="active"><a style="color: white" href="/appcase_manage">app用例</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li class="active"><a style="color: white" href="/webcase_manage">web用例</a></li>
         </ul>
         <ul class="nav justify-content-end">
             <li class="nav-link"><a style="color: white" href="#">{{user}}</a></li>
@@ -33,6 +35,23 @@
         &nbsp; &nbsp; &nbsp; &nbsp;
         <input type="search" name="api_name" placeholder="名称" required>
         <button type="submit">搜索</button>
+
+        <div style="float:right;width:65%">
+
+            <select name="Apis" id="id_Apis">
+                <option value="" selected>--------产品--------</option>
+                <option value="">api单一流程接口测试用例</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="related-widget-wrapper-link change-related" id="change_id_Apis"
+               data-href-template="/admin/apitest/apis/__fk__/change/?_to_field=id&amp;_popup=1" title="更改选中的测试用例">
+                <img src="../../static/admin/img/icon-changelink.png" alt="修改"/>
+            </a>
+            <a style='color:lightblue' class="related-widget-wrapper-link add-related" id="add_id_Apis"
+               href="/admin/apitest/apis/add/?_to_field=id&amp;_popup=1" title="增加另一个 测试用例">
+                <img src="../../static/admin/img/icon-addlink.svg" alt="增加"/>增加
+            </a>
+        </div>
     </form>
 </div>
 <div class="row" style="padding-top: 20px;">
@@ -49,6 +68,7 @@
                 <th>预期结果</th>
                 <th>测试结果</th>
                 <th>时间</th>
+                <th>编辑</th>
             </tr>
             </thead>
             <tbody>
@@ -63,6 +83,11 @@
                 <td>{{api.api_result}}</td>
                 <td>{{api.api_status}}</td>
                 <td>{{api.create_time}}</td>
+                <td>
+                    <a style="color: lightblue" class="related-widget-wrapper-link add-related" id="add_id_APis"
+                       href="../admin/apitest/apis/{{api.id}}/change?_to_field=id&amp;_popup=1"><img
+                            src="../../static/admin/img/icon-changelink.png"></a>
+                </td>
             </tr>
             {% endfor %}
             </tbody>

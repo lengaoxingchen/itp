@@ -12,12 +12,13 @@
     <div class="container">
         <a class="navbar-brand" href="#">&nbsp;</a>
         <ul class="nav justify-content-center">
-            <li><a style="color: white" href="/webcase_manage/">web测试用例</a></li>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <li class="active"><a style="color: white" href="/webcasestep_manage/">web测试用例步骤</a></li>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li class="active"><a style="color: white" href="/apis_manage">单一接口测试用例</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li><a style="color: white" href="/apitest_manage">流程接口</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li class="active"><a style="color: white" href="/appcase_manage">app用例</a></li>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li class="active"><a style="color: white" href="/webcase_manage">web用例</a></li>
         </ul>
         <ul class="nav justify-content-end">
             <li class="nav-link"><a style="color: white" href="#">{{user}}</a></li>
@@ -41,16 +42,16 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <td>所属产品</td>
-                <td>所属用例</td>
-                <td>步骤</td>
-                <td>定位方式</td>
-                <td>控件元素</td>
-                <td>操作方法</td>
-                <td>测试数据</td>
-                <td>验证数据</td>
-                <td>测试结果</td>
-                <td>时间</td>
+                <th>所属产品</th>
+                <th>所属用例</th>
+                <th>步骤</th>
+                <th>定位方式</th>
+                <th>控件元素</th>
+                <th>操作方法</th>
+                <th>测试数据</th>
+                <th>验证数据</th>
+                <th>测试结果</th>
+                <th>时间</th>
             </tr>
             </thead>
             <tbody>
@@ -84,7 +85,8 @@
             {# 上一页链接开始 #}
             {% if web_case_steps.has_previous %}
             {# 如果有上一页,则正常展示上一页链接 #}
-            <li class="previous"><a href="/webcasestep_manage/?page={{web_case_steps.previous_page_number}}">上一页</a></li>
+            <li class="previous"><a href="/webcasestep_manage/?page={{web_case_steps.previous_page_number}}">上一页</a>
+            </li>
             {# 上一页标签 #}
             {% else %}
             <li class="previous disabled"><a href="#">上一页</a></li>
@@ -113,6 +115,12 @@
             {# 下一页链接结束 #}
         </ul>
     </div>
-
+</div>
+<div style="position: absolute;right: 100px;width: 160px;">
+    <tr>
+        <th>WebCaseStep总数:</th>
+        <td>{{webcasestep_count}}</td>
+    </tr>
+</div>
 </body>
 </html>

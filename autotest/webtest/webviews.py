@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 def webcase_manage(request):
     username = request.session.get('user', '')
     webcase_list = WebCase.objects.all()
+    webcase_count = WebCase.objects.all().count()
     paginator = Paginator(webcase_list, 8)
     page = request.GET.get('page', 1)
     currentPage = int(page)
@@ -20,13 +21,15 @@ def webcase_manage(request):
         webcase_list = paginator.page(1)
     except EmptyPage:
         webcase_list = paginator.page(paginator.num_pages)
-    return render(request, 'webcase_manage.html', {"user": username, 'web_cases': webcase_list})
+    return render(request, 'webcase_manage.html',
+                  {"user": username, 'web_cases': webcase_list, 'webcase_count': webcase_count})
 
 
 @login_required
 def webcasestep_manage(request):
     username = request.session.get('user', '')
     webcasestep_list = WebCaseStep.objects.all()
+    webcasestep_count = WebCaseStep.objects.all().count()
     paginator = Paginator(webcasestep_list, 8)
     page = request.GET.get('page', 1)
     currentPage = int(page)
@@ -36,7 +39,8 @@ def webcasestep_manage(request):
         webcasestep_list = paginator.page(1)
     except EmptyPage:
         webcasestep_list = paginator.page(paginator.num_pages)
-    return render(request, 'webcasestep_manage.html', {'user': username, 'web_case_steps': webcasestep_list})
+    return render(request, 'webcasestep_manage.html',
+                  {'user': username, 'web_case_steps': webcasestep_list, 'webcasestep_count': webcasestep_count})
 
 
 @login_required

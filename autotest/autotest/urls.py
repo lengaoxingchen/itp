@@ -52,4 +52,5 @@ urlpatterns = [
     path('appstep_search/', appviews.appstep_search),
     path('webcase_search/', webviews.webcase_search),
     path('webstep_search/', webviews.webstep_search),
+    path('welcome/', views.welcome),
 ]
