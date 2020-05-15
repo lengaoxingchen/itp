@@ -64,8 +64,9 @@
                 <th>测试结果</th>
                 <th>测试负责人</th>
                 <th>时间</th>
-                <th>测试用例步骤</th>
+                <th>查看</th>
                 <th>编辑</th>
+                <th>删除</th>
             </tr>
             </thead>
             <tbody>
@@ -77,12 +78,18 @@
                 <td>{{web_case.web_test_result}}</td>
                 <td>{{web_case.web_tester}}</td>
                 <td>{{web_case.create_time}}</td>
-                <td><a href="#"> {{web_case.web_case_step}}</a></td>
-                <td>{{web_case.web_case_step}}</td>
+                <td><a href="{% url 'webcasestep_manage' %}?webcase.id={{web_case.id}}"><img
+                        src="../../static/admin/img/icon-yes.png"/></a></td>
+                </td>
                 <td>
                     <a style="color: lightblue" class="related-widget-wrapper-link add-related" id="add_id_Webcase"
-                       href="../admin/webcase/webcase/{{web_case.id}}/change?_to_field=id&amp;_popup=1"><img
+                       href="../admin/webtest/webcase/{{web_case.id}}/change?_to_field=id&amp;_popup=1"><img
                             src="../../static/admin/img/icon-changelink.png"></a>
+                </td>
+                <td><a style='color:lightblue' class="related-widget-wrapper-link add-related" id="add_id_Apitest"
+                       href="../admin/webtest/webcase/{{web_case.id}}/delete/?_to_field=id&_popup=1"><img
+                        src="../../static/admin/img/icon-deletelink.png"/>
+                </a>
                 </td>
             </tr>
             {% endfor %}

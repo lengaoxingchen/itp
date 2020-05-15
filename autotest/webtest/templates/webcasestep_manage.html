@@ -55,8 +55,9 @@
             </tr>
             </thead>
             <tbody>
+            {% for web_case_step in web_case_steps %}
             <tr>
-                {% for web_case_step in web_case_steps %}
+                {% if web_case_step.WebCase.id == webcase.id %}
                 <td>{{web_case_step.WebCase.Product.product_name}}</td>
                 <td>case{{web_case_step.WebCase.id}}:{{web_case_step.WebCase.web_case_name}}</td>
                 <td>{{web_case_step.web_test_step}}:{{web_case_step.web_test_objname}}</td>
@@ -72,6 +73,7 @@
                     {% endif %}
                 </td>
                 <td>{{web_case_step.create_time}}</td>
+                {% endif %}
             </tr>
             {% endfor %}
             </tbody>
@@ -116,6 +118,18 @@
         </ul>
     </div>
 </div>
+
+<td>
+    <a style='color:lightblue' href="../appcase_manage/">
+        <img src="../../static/admin/img/icon-yes.png" alt="返回"/>返回
+    </a>
+</td>
+
+<td>
+    <a style='color:lightblue' class="related-widget-wrapper-link add-related" id="add_id_Apitest"
+       href="../admin/webtest/webcase/{{ webcase.id  }}/change/?_to_field=id&_popup=1">
+        <img src="../../static/admin/img/icon-changelink.png"/>编辑</a>
+</td>
 <div style="position: absolute;right: 100px;width: 160px;">
     <tr>
         <th>WebCaseStep总数:</th>

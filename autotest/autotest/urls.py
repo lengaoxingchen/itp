@@ -30,15 +30,15 @@ urlpatterns = [
     path('logout/', views.logout),  # 登出功能
     path('product_manage/', proviews.product_manage),
     path('apitest_manage/', views.apitest_manage),
-    path('apistep_manage/', views.apistep_manage,name='apistep_manage'),
+    path('apistep_manage/', views.apistep_manage, name='apistep_manage'),
     path('apis_manage/', views.apis_manage),
     path('bug_manage/', bugviews.bug_manage),
     path('set_manage/', setviews.set_manage),
     path('set_user/', setviews.set_user),
     path('appcase_manage/', appviews.appcase_manage),
-    path('appcasestep_manage/', appviews.appcasestep_manage),
+    path('appcasestep_manage/', appviews.appcasestep_manage, name='appcasestep_manage'),
     path('webcase_manage/', webviews.webcase_manage),
-    path('webcasestep_manage/', webviews.webcasestep_manage),
+    path('webcasestep_manage/', webviews.webcasestep_manage, name='webcasestep_manage'),
     path('test_report/', views.test_report),
     path('left/', views.left),
     path('apitest_search/', views.apitest_search),
@@ -54,4 +54,3 @@ urlpatterns = [
     path('webstep_search/', webviews.webstep_search),
     path('welcome/', views.welcome),
 ]
-

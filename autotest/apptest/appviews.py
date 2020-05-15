@@ -30,6 +30,8 @@ def appcasestep_manage(request):
     username = request.session.get('user', '')
     appcasestep_list = AppCaseStep.objects.all()
     appcasestep_count = AppCaseStep.objects.all().count()
+    appcase_id = request.GET.get('appcase.id', None)
+    appcase = AppCase.objects.get(id=appcase_id)
     paginator = Paginator(appcasestep_list, 8)
     page = request.GET.get('page', 1)
     currentPage = int(page)
@@ -40,7 +42,8 @@ def appcasestep_manage(request):
     except EmptyPage:
         appcasestep_list = paginator.page(paginator.num_pages)
     return render(request, 'appcasestep_manage.html',
-                  {'user': username, 'app_case_steps': appcasestep_list, 'appcasestep_count': appcasestep_count})
+                  {'user': username, 'app_case_steps': appcasestep_list, 'appcase': appcase,
+                   'appcasestep_count': appcasestep_count})
 
 
 @login_required
