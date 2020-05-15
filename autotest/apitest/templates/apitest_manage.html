@@ -62,12 +62,14 @@
             <tr>
                 <th>ID</th>
                 <th>产品</th>
-                <th>流程接口测试用例名称</th>
-                <th>流程接口描述</th>
-                <th>测试负责人</th>
-                <th>测试结果</th>
-                <th>测试用例步骤</th>
+                <th>用例名称</th>
+                <th>接口场景描述</th>
+                <th>结果</th>
+                <th>负责人</th>
+                <th>时间</th>
+                <th>查看</th>
                 <th>编辑</th>
+                <th>删除</th>
             </tr>
             </thead>
             <tbody>
@@ -77,7 +79,6 @@
                 <td>{{apitest.Product.product_name}}</td>
                 <td>{{apitest.apitest_name}}</td>
                 <td>{{apitest.apitest_desc}}</td>
-                <td>{{apitest.apitester}}</td>
                 <td>
                     {% if apitest.apitest_result == 1 %}
                     <a style="color: green"> {{apitest.apitest_result}}</a>
@@ -85,11 +86,20 @@
                     <a style="color: red"> {{apitest.apitest_result}}</a>
                     {% endif %}
                 </td>
-                <td>{{apitest.ApiStep.apitest_step}}</td>
+                <td>{{apitest.apitester}}</td>
+                <td>{{apitest.create_time}}</td>
+                <td><a href="{% url 'apistep_manage' %}?apitest.id={{apitest.id}}">
+                    <img src="../../static/admin/img/icon-yes.png"/>
+                </a></td>
                 <td>
                     <a style="color: lightblue" class="related-widget-wrapper-link add-related" id="add_id_APitest"
                        href="../admin/apitest/apitest/{{apitest.id}}/change?_to_field=id&amp;_popup=1"><img
                             src="../../static/admin/img/icon-changelink.png"></a>
+                </td>
+                <td><a style='color:lightblue' class="related-widget-wrapper-link add-related" id="add_id_Apitest"
+                       href="../admin/apitest/apitest/{{apitest.id}}/delete/?_to_field=id&_popup=1"><img
+                        src="../../static/admin/img/icon-deletelink.png"/>
+                </a>
                 </td>
             </tr>
             {% endfor %}

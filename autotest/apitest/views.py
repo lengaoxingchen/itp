@@ -65,6 +65,8 @@ def apitest_manage(request):
 @login_required
 def apistep_manage(request):
     apistep_list = ApiStep.objects.all()
+    apitestid = request.GET.get('apitest.id', None)
+    apitest = ApiTest.objects.get(id=apitestid)
     username = request.session.get('user', '')
     apistep_count = ApiStep.objects.all().count()  # 统计ApiStep数
     paginator = Paginator(apistep_list, 8)
@@ -77,7 +79,7 @@ def apistep_manage(request):
     except EmptyPage:
         apistep_list = paginator.page(paginator.num_pages)
     return render(request, "apistep_manage.html",
-                  {"user": username, "apisteps": apistep_list, 'apistep_count': apistep_count})
+                  {"user": username, "apitest": apitest, "apisteps": apistep_list, 'apistep_count': apistep_count})
 
 
 # 单一接口管理
@@ -148,4 +150,3 @@ def api_search(request):
 
 def welcome(request):
     return render(request, 'welcome.html')
-
