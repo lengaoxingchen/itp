@@ -98,5 +98,5 @@ def urlParam(param):
     pass
 
 
-def readRes(result, done):
+def readRes(res, res_check):
     pass
